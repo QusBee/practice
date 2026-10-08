@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [github.com/QusBee/meet-landing](https://github.com/QusBee/meet-landing)
-- Live Site URL: [qusbee.github.io/meet-landing](https://qusbee.github.io/meet-landing/)
+- Solution URL: [Meet landing page source](https://github.com/QusBee/practice/tree/main/frontend-mentor/meet-landing)
+- Live Site URL: [Meet landing page](https://qusbee.github.io/practice/frontend-mentor/meet-landing/)
 
 ## My process
 
