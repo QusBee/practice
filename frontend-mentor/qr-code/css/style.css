@@ -1,0 +1,67 @@
+:root {
+  --color-white: hsl(0, 0%, 100%);
+  --color-slate-300: hsl(212, 45%, 89%);
+  --color-slate-500: hsl(216, 15%, 48%);
+  --color-slate-900: hsl(218, 44%, 22%);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  min-height: 100dvh;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-slate-300);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.6rem 4rem;
+  gap: 2.4rem;
+  margin: 2rem;
+  max-width: 32rem;
+  width: 100%;
+  border-radius: 2rem;
+  background-color: var(--color-white);
+  box-shadow: 0 2.5rem 2.5rem hsla(0, 0%, 0%, 0.05);
+}
+
+.card__image {
+  max-width: 28.8rem;
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+}
+
+.card__text {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.6rem;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.card__title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-slate-900);
+}
+
+.card__description {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  letter-spacing: 0.013em;
+  color: var(--color-slate-500);
+}
