@@ -1,0 +1,127 @@
+:root {
+  --color-white: hsl(0, 0%, 100%);
+  --color-yellow: hsl(47, 88%, 63%);
+  --color-gray-500: hsl(0, 0%, 42%);
+  --color-gray-950: hsl(0, 0%, 7%);
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('../assets/fonts/static/Figtree-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('../assets/fonts/static/Figtree-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Figtree', sans-serif;
+  display: flex;
+  min-height: 100dvh;
+  justify-content: center;
+  align-items: center;
+  padding: 2.4rem;
+  background-color: var(--color-yellow);
+  color: var(--color-gray-950);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 38.4rem;
+  width: 100%;
+  padding: 2.3rem;
+  gap: 2.4rem;
+  background-color: var(--color-white);
+  border-radius: 2rem;
+  border: 0.1rem solid var(--color-gray-950);
+  box-shadow: 0.8rem 0.8rem 0 0 var(--color-gray-950);
+}
+
+.card__image {
+  border-radius: 1rem;
+  width: 100%;
+  height: auto;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card__category {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.5;
+  padding: 0.4rem 1.2rem;
+  width: fit-content;
+  background-color: var(--color-yellow);
+  border-radius: 0.4rem;
+}
+
+.card__date {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.card__title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.card__link {
+  text-decoration: none;
+  color: var(--color-gray-950);
+  transition: color 0.3s ease;
+}
+
+.card__link:hover,
+.card__link:focus-visible {
+  color: var(--color-yellow);
+}
+
+.card__description {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-gray-500);
+}
+
+.author {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.author__avatar {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author__name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
