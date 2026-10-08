@@ -58,7 +58,8 @@ body {
 .card__image {
   border-radius: 1rem;
   width: 100%;
-  height: auto;
+  height: 20rem;
+  object-fit: cover;
 }
 
 .card__content {
@@ -124,4 +125,22 @@ body {
   font-size: 1.4rem;
   font-weight: 800;
   line-height: 1.5;
+}
+
+@media (max-width: 375px) {
+  .card__category {
+    font-size: 1.2rem;
+  }
+
+  .card__date {
+    font-size: 1.2rem;
+  }
+
+  .card__title {
+    font-size: 2rem;
+  }
+
+  .card__description {
+    font-size: 1.4rem;
+  }
 }
