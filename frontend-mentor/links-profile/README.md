@@ -1,106 +1,105 @@
-# Frontend Mentor - Social links profile
+# Frontend Mentor - Social links profile solution
 
-![Design preview for the Social links profile coding challenge](./preview.jpg)
+This is a solution to the [Social links profile challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/social-links-profile-UG32l9m6dQ). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+  - [AI Collaboration](#ai-collaboration)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## Overview
 
-**To do this challenge, you need a basic understanding of HTML and CSS.**
+### The challenge
 
-## The challenge
+Build out the social links profile card and get it looking as close to the design as possible.
 
-Your challenge is to build out this social links profile and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to: 
+Users should be able to:
 
 - See hover and focus states for all interactive elements on the page
 
-### Want some support on the challenge? 
+### Screenshot
 
-[Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+<img src="./assets/images/desktop.png" width="600" alt="Desktop screenshot">
+<img src="./assets/images/tablet.png" width="300" alt="Tablet screenshot">
+<img src="./assets/images/mobile.png" width="200" alt="Mobile screenshot">
 
-## Where to find everything
+### Links
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+- Solution URL: [Social links profile source](https://github.com/QusBee/practice/tree/main/frontend-mentor/links-profile)
+- Live Site URL: [Social links profile](https://qusbee.github.io/practice/frontend-mentor/links-profile/)
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+## My process
 
-If you would like the Figma design file to gain experience using professional tools and build more accurate projects faster, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+### Built with
 
-All the required assets for this project are in the `/assets` folder. The images are already exported for the correct screen size and optimized.
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- BEM class naming
+- Self-hosted fonts with `@font-face`
+- Mobile-first workflow
 
-We also include variable and static font files for the required fonts for this project. You can choose to either link to Google Fonts or use the local font files to host the fonts yourself. Note that we've removed the static font files for the font weights that aren't needed for this project.
+### What I learned
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+This was a small project, but a lot of the lessons came from questioning choices that looked fine at first.
 
-## Using AI coding assistants
+**Semantics of a list of links.** The links are an `ul` of `a` elements, so a screen reader announces how many there are. In Safari with VoiceOver, `list-style: none` removes the list semantics, so I added `role="list"` to keep them. I also decided that a plain list is enough here and the `nav` wrapper was not needed, and I used a normal `<p>` for the bio because `<q>` renders its own curly quotes, which do not match the design.
 
-We've included two files to help you if you're using AI coding assistants (like Claude, GitHub Copilot, Cursor, etc.) while working on this challenge:
+**Links need an `href`.** An `<a>` without `href` is not focusable and is not announced as a link. With a real `href`, the hover and focus styles can share one rule, and `:focus-visible` shows the state only for keyboard users:
 
-- `AGENTS.md` - Contains detailed instructions for AI assistants on how to help you with this challenge. It's tailored to this challenge's difficulty level, so the AI will provide guidance appropriate to your learning stage—offering more support for beginner challenges and encouraging more independence on advanced ones.
-- `CLAUDE.md` - A pointer file that directs Claude-based tools to the AGENTS.md instructions.
+```css
+.card__link:hover,
+.card__link:focus-visible {
+  color: var(--color-grey-900);
+  background-color: var(--color-green);
+}
+```
 
-**How to use them:** You don't need to do anything! These files are automatically detected by most AI coding tools. The AI will read them and adjust its behavior to be a better learning partner—guiding you toward solutions rather than just giving you the answers.
+**`gap` only works for flex and grid.** I had written `gap` on a `display: block` link and it did nothing, so I removed it. In the same way, `width: 100%` on a block element and on a flex item in a column is redundant, because they already fill the container.
 
-**Note:** These files are designed to help you *learn*, not to do the work for you. The AI is instructed to ask questions, give hints, and explain concepts rather than writing complete solutions.
+**Do not hard-code widths on inner blocks.** A fixed `max-width` on the info block matched the mobile card, but it would have broken once the card became wider on tablet. Letting the card padding define the inner width makes the layout follow the card automatically.
 
-## Building your project
+**Self-hosting fonts.** I described each font weight (400, 600, 700) with `@font-face`. The path in `src` is relative to the CSS file, while the optional `preload` links in the HTML use paths relative to the HTML file.
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+**Mobile-first with one breakpoint.** The base styles are for mobile, and a single `min-width: 768px` media query only changes the card width and padding. The desktop design is the same size as the tablet one, so nothing more was needed.
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+### Continued development
 
-## Deploying your project
+- Choose breakpoints based on where the layout actually needs to change, not only on the design widths.
+- Practice testing at 320px and with larger text sizes in the browser settings.
+- Learn more about accessibility, including screen reader behaviour in different browsers.
+- Try `clamp()` for fluid sizes.
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+### Useful resources
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+- [MDN - gap](https://developer.mozilla.org/en-US/docs/Web/CSS/gap) - Showed which layouts the property applies to.
+- [MDN - :focus-visible](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) - When the focus style is shown.
+- [MDN - @font-face](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) - Descriptors and the `format()` values.
+- [MDN - ARIA list role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/list_role) - Why a list can lose its semantics with `list-style: none`.
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://www.frontendmentor.io/guides/hosting-your-solution).
+### AI Collaboration
 
-## Create a custom `README.md`
+I used Claude as a mentor and reviewer, not as a code generator.
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+- **How I used it:** I wrote all the HTML and CSS myself. Claude reviewed each stage and pointed out problems, such as the unquoted `format()` values, the `gap` on a block element, redundant widths and the missing list role in Safari. It explained the options and I made the decisions (for example, dropping the `nav` wrapper and returning to a `<p>` for the bio).
+- **What worked well:** Considering the semantic options myself (`nav` or `ul`, `q` or `p`) made the choices easier to remember.
+- **What I'd do differently:** Check unusual behaviours in the browser DevTools myself before asking, so I can find the cause on my own.
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+## Author
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+- Frontend Mentor - [@QusBee](https://www.frontendmentor.io/profile/Qusbee)
+- GitHub - [@QusBee](https://github.com/Qusbee)
 
-## Submitting your solution
+## Acknowledgments
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://www.frontendmentor.io/guides/how-to-submit-solutions) for tips on how to do this.
-
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
-
-## Sharing your solution
-
-There are multiple places you can share your solution:
-
-1. Share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community). 
-2. Share on [X (formerly Twitter)](https://x.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in your post. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on [LinkedIn](https://www.linkedin.com/company/frontend-mentor/).
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
-
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+Thanks to the Frontend Mentor team for the design files and challenge brief.
