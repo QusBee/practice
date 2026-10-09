@@ -123,3 +123,10 @@ body {
   color: var(--color-grey-900);
   background-color: var(--color-green);
 }
+
+@media (min-width: 768px) {
+  .card {
+    max-width: 38.4rem;
+    padding: 4rem;
+  }
+}
