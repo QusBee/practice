@@ -2,33 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Mentor | Social links profile</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 0.6875rem; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preload" href="./assets/fonts/static/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="./assets/fonts/static/Inter-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="./assets/fonts/static/Inter-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
-  Jessica Randall
-  London, United Kingdom
-  "Front-end developer and avid reader."
-
-  GitHub
-  Frontend Mentor
-  LinkedIn
-  Twitter
-  Instagram
-  
-  <footer class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </footer>
+  <main class="card">
+    <img class="card__image" src="./assets/images/avatar-jessica.jpeg" width="176" height="176" alt="">
+    <div class="card__info">
+      <h1 class="card__name">Jessica Randall</h1>
+      <span class="card__location">London, United Kingdom</span>
+    </div>
+    <p class="card__bio">"Front-end developer and avid reader."</p>
+    <ul class="card__list">
+      <li class="card__item"><a class="card__link" href="#">GitHub</a></li>
+      <li class="card__item"><a class="card__link" href="#">Frontend Mentor</a></li>
+      <li class="card__item"><a class="card__link" href="#">LinkedIn</a></li>
+      <li class="card__item"><a class="card__link" href="#">Twitter</a></li>
+      <li class="card__item"><a class="card__link" href="#">Instagram</a></li>
+    </ul>
+  </main>
 </body>
 </html>
