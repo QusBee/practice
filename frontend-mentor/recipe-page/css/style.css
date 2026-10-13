@@ -243,3 +243,9 @@ ol.recipe__list > .recipe__item::before {
     font-size: 4rem;
   }
 }
+
+@media (min-width: 1440px) {
+  .recipe {
+    max-width: 73.6rem;
+  }
+}
