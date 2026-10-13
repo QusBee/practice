@@ -1,102 +1,117 @@
-# Frontend Mentor - Recipe page
+# Frontend Mentor - Recipe page solution
 
-![Design preview for the Recipe page coding challenge](./preview.jpg)
+This is a solution to the [Recipe page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/recipe-page-KiTsR8QQKm). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+  - [AI Collaboration](#ai-collaboration)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## Overview
 
-**To do this challenge, you need a basic understanding of HTML and CSS.**
+### The challenge
 
-## The challenge
+Build out the recipe page and get it looking as close to the design as possible. The page has three layouts: mobile, tablet and desktop.
 
-Your challenge is to build out this recipe page and get it looking as close to the design as possible.
+### Screenshot
 
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
+<img src="./assets/images/desktop.png" width="600" alt="Desktop screenshot">
+<img src="./assets/images/tablet.png" width="300" alt="Tablet screenshot">
+<img src="./assets/images/mobile.png" width="200" alt="Mobile screenshot">
 
-### Want some support on the challenge? 
+### Links
 
-[Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+- Solution URL: [Recipe page source](https://github.com/QusBee/practice/tree/main/frontend-mentor/recipe-page)
+- Live Site URL: [Recipe page](https://qusbee.github.io/practice/frontend-mentor/recipe-page/)
 
-## Where to find everything
+## My process
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+### Built with
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- BEM class naming
+- CSS counters and pseudo-elements for custom list markers
+- Self-hosted fonts with `@font-face`
+- Mobile-first workflow with two breakpoints (768px and 1440px)
 
-If you would like the Figma design file to gain experience using professional tools and build more accurate projects faster, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+### What I learned
 
-All the required assets for this project are in the `/assets` folder. The images are already exported for the correct screen size and optimized.
+The most useful lessons came from things that looked fine at first but did not behave as I expected.
 
-We also include variable and static font files for the required fonts for this project. You can choose to either link to Google Fonts or use the local font files to host the fonts yourself. Note that we've removed the static font files for the font weights that aren't needed for this project.
+**BEM: a modifier is a small difference, not a different element.** The "Preparation time" heading differs from the other headings in font, size, weight and colour, so it is not a variant of `recipe__title`. The whole pink card is a separate block (`preparation`) with its own elements. The remaining headings share a base class, and only the `h1` gets a modifier named by its role (`recipe__title--main`), not by how it looks.
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+**Specificity and order.** My modifier for the pink list markers did nothing, because the base rule had a more specific selector (a tag, two classes and a pseudo-element). The modifier needs the same structure, and it must come after the base rule:
 
-## Using AI coding assistants
+```css
+ul.recipe__list > .recipe__item::before {
+  background-color: var(--color-brown-800);
+}
 
-We've included two files to help you if you're using AI coding assistants (like Claude, GitHub Copilot, Cursor, etc.) while working on this challenge:
+ul.recipe__list--accent > .recipe__item::before {
+  background-color: var(--color-rose-800);
+}
+```
 
-- `AGENTS.md` - Contains detailed instructions for AI assistants on how to help you with this challenge. It's tailored to this challenge's difficulty level, so the AI will provide guidance appropriate to your learning stage—offering more support for beginner challenges and encouraging more independence on advanced ones.
-- `CLAUDE.md` - A pointer file that directs Claude-based tools to the AGENTS.md instructions.
+**A comma starts a new selector.** In a list of selectors, every part needs its full path. Writing `.row:first-child .name, .value` also matches every `.value` on the page. I made this mistake twice.
 
-**How to use them:** You don't need to do anything! These files are automatically detected by most AI coding tools. The AI will read them and adjust its behavior to be a better learning partner—guiding you toward solutions rather than just giving you the answers.
+**Custom list markers.** I removed the default markers with `list-style: none` and drew them with `::before`. The dots use an absolutely positioned pseudo-element, and the numbers use CSS counters (`counter-reset` on the list, `counter-increment` on each item). The item needs `position: relative`, otherwise the marker is placed relative to a far-away ancestor. In Safari with VoiceOver, `list-style: none` removes the list semantics, so I added `role="list"` to every list.
 
-**Note:** These files are designed to help you *learn*, not to do the work for you. The AI is instructed to ask questions, give hints, and explain concepts rather than writing complete solutions.
+**An `img` is an inline element.** The thin strip under the picture was the space the browser leaves below a line of text. `display: block` removed it. For the fixed 300px height on tablet and desktop I used `object-fit: cover`, so the image is cropped instead of stretched. The `width` and `height` attributes in the HTML stop the layout from jumping while the image loads.
 
-## Building your project
+**Tables are different from flex and grid.** A table has no `gap`, so the 16px gap between the two columns from Figma became 8px of padding on each side of the boundary. Equal columns come from `table-layout: fixed` with `width: 100%`. The 12px between rows in the design exists only between rows, so I removed the top padding of the first row and the bottom padding of the last one with `:first-child` and `:last-child`. The 1px row dividers take space in a table, so I subtracted 1px from the padding of the other rows with `:not(:last-child)`.
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+```css
+.nutrition-table__row:not(:last-child) .nutrition-table__name,
+.nutrition-table__row:not(:last-child) .nutrition-table__value {
+  padding-bottom: 1.1rem;
+}
+```
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+**Lines in Figma take no space.** The two `hr` dividers added 2px to the card height. A zero-height element casts a zero-area shadow, so a `box-shadow` with a vertical offset alone drew nothing. A spread value gives the shadow an area, which makes a 1px line that does not affect the layout.
 
-## Deploying your project
+**Measuring.** A difference of 1px between two browsers in responsive mode was a measuring artifact, not a bug in my CSS. Checking in a second browser saved me from "fixing" correct code. Text can also wrap differently in different browsers when a line is almost the full width.
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+### Continued development
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+- Practise tables separately with a series of small exercises, because most of my problems in this project were with the table.
+- Learn how to choose breakpoints from the content, not only from the design widths.
+- Configure the HTML formatter so that the formatted markup is easier for me to read.
+- Get more comfortable with measuring layouts in DevTools and in Figma.
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://www.frontendmentor.io/guides/hosting-your-solution).
+### Useful resources
 
-## Create a custom `README.md`
+- [MDN - border-collapse](https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse) - How cell borders are merged and why row borders need it.
+- [MDN - table-layout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) - Fixed layout gives equal column widths.
+- [MDN - object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) - Cropping an image to a fixed size.
+- [MDN - box-shadow](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) - The offset, blur and spread values.
+- [MDN - counter-increment](https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment) - How CSS counters work.
+- [MDN - Specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) - Why a rule lower in the file can still lose.
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+### AI Collaboration
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+I used Claude as a mentor and reviewer, not as a code generator.
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+- **How I used it:** I wrote all the HTML and CSS myself. Claude reviewed each stage, measured the design files, and pointed out problems such as typos in attributes and variable names, selector specificity, the comma in selector lists, the zero-height divider and the extra padding in the table. It explained the options and I made the decisions (for example, making "Preparation" its own block).
+- **What worked well:** Explaining the logic first and leaving the writing to me. It was easier to remember a concept when I had to find the fix myself.
+- **What I'd do differently:** Look at the problem in DevTools and compare it with the design first, so I can find the cause myself before asking.
 
-## Submitting your solution
+## Author
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://www.frontendmentor.io/guides/how-to-submit-solutions) for tips on how to do this.
+- Frontend Mentor - [@QusBee](https://www.frontendmentor.io/profile/Qusbee)
+- GitHub - [@QusBee](https://github.com/Qusbee)
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+## Acknowledgments
 
-## Sharing your solution
-
-There are multiple places you can share your solution:
-
-1. Share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community). 
-2. Share on [X (formerly Twitter)](https://x.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in your post. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on [LinkedIn](https://www.linkedin.com/company/frontend-mentor/).
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
-
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+Thanks to the Frontend Mentor team for the design files and the challenge brief.
