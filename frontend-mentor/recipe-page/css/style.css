@@ -45,6 +45,10 @@ body {
   background-color: var(--color-stone-100);
 }
 
+.recipe {
+  background-color: var(--color-white);
+}
+
 .recipe__image {
   display: block;
   width: 100%;
@@ -56,7 +60,6 @@ body {
   flex-direction: column;
   padding: 4rem 3.2rem;
   gap: 3.2rem;
-  background-color: var(--color-white);
 }
 
 .recipe__header {
@@ -158,7 +161,6 @@ ol.recipe__list > .recipe__item::before {
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
-
 }
 
 .nutrition-table__caption {
@@ -184,11 +186,14 @@ ol.recipe__list > .recipe__item::before {
 .nutrition-table__name {
   padding-left: 3.2rem;
   padding-right: 0.8rem;
+  font-weight: 400;
 }
 
 .nutrition-table__value {
   padding-left: 0.8rem;
   padding-right: 3.2rem;
+  font-weight: 700;
+  color: var(--color-brown-800);
 }
 
 .nutrition-table__row:first-child .nutrition-table__name,
@@ -204,15 +209,6 @@ ol.recipe__list > .recipe__item::before {
 .nutrition-table__row:not(:last-child) .nutrition-table__name,
 .nutrition-table__row:not(:last-child) .nutrition-table__value {
   padding-bottom: 1.1rem;
-}
-
-.nutrition-table__value {
-  font-weight: 700;
-  color: var(--color-brown-800);
-}
-
-.nutrition-table__name {
-  font-weight: 400;
 }
 
 @media (min-width: 768px) {
@@ -231,7 +227,6 @@ ol.recipe__list > .recipe__item::before {
     padding: 4rem;
     gap: 4rem;
     border-radius: 2.4rem;
-    background-color: var(--color-white);
   }
 
   .recipe__image {
