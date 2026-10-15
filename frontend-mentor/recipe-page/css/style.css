@@ -10,18 +10,16 @@
 }
 
 @font-face {
-  font-family: "Outfit";
-  src: url("../assets/fonts/outfit/Outfit-VariableFont_wght.ttf")
-    format("truetype");
+  font-family: 'Outfit';
+  src: url('../assets/fonts/outfit/Outfit-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Young Serif";
-  src: url("../assets/fonts/young-serif/YoungSerif-Regular.ttf")
-    format("truetype");
+  font-family: 'Young Serif';
+  src: url('../assets/fonts/young-serif/YoungSerif-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -38,7 +36,7 @@ html {
 }
 
 body {
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
   color: var(--color-stone-600);
@@ -69,7 +67,7 @@ body {
 }
 
 .recipe__title {
-  font-family: "Young Serif", serif;
+  font-family: 'Young Serif', serif;
   font-size: 2.8rem;
   font-weight: 400;
   line-height: 1;
@@ -122,7 +120,7 @@ body {
 
 ul.recipe__list > .recipe__item::before {
   position: absolute;
-  content: "";
+  content: '';
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 50%;
@@ -146,7 +144,7 @@ ol.recipe__list > .recipe__item {
 
 ol.recipe__list > .recipe__item::before {
   position: absolute;
-  content: counter(step) ".";
+  content: counter(step) '.';
   top: 0;
   left: 0.4em;
   font-weight: 700;
