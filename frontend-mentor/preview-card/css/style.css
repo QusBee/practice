@@ -39,6 +39,7 @@ body {
 
 .card__image {
   display: block;
+  object-fit: cover;
   width: 100%;
   height: auto;
 }
@@ -47,7 +48,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 3.2rem;
-  gap: 2.4rem;
+  gap: 2.3rem;
 }
 
 .card__info {
@@ -136,4 +137,25 @@ body {
 .card__btn:hover,
 .card__btn:focus-visible {
   background-color: var(--color-green-700);
+}
+
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    max-width: 60rem;
+    width: 100%;
+  }
+
+  .card__content {
+    flex: 1 1 50%;
+    gap: 3.1rem;
+  }
+
+  .card__picture {
+    flex-basis: 50%;
+  }
+
+  .card__image {
+    height: 100%;
+  }
 }
