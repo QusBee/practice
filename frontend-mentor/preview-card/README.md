@@ -1,105 +1,122 @@
-# Frontend Mentor - Product preview card component
+# Frontend Mentor - Product preview card component solution
 
-![Design preview for the Product preview card component coding challenge](./design/desktop-preview.jpg)
+This is a solution to the [Product preview card component challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-preview-card-component-GO7UmttRfa). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+  - [AI Collaboration](#ai-collaboration)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## Overview
 
-**To do this challenge, you need a basic understanding of HTML and CSS.**
+### The challenge
 
-## The challenge
-
-Your challenge is to build out this product preview card component and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to:
+Users should be able to:
 
 - View the optimal layout depending on their device's screen size
 - See hover and focus states for interactive elements
 
-### Want some support on the challenge? 
+I built the card to match the design as closely as possible. On small screens the image is on top of the text. From 768px the card becomes a row, and the image and the text take exactly half of the card each.
 
-[Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+### Screenshot
 
-## Where to find everything
+<img src="./images/desktop.png" width="600" alt="Desktop screenshot">
+<img src="./images/tablet.png" width="300" alt="Tablet screenshot">
+<img src="./images/mobile.png" width="200" alt="Mobile screenshot">
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+### Links
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+- Solution URL: [Product preview card source](https://github.com/QusBee/practice/tree/main/frontend-mentor/preview-card)
+- Live Site URL: [Product preview card](https://qusbee.github.io/practice/frontend-mentor/preview-card/)
 
-If you would like the Figma design file to gain experience using professional tools and build more accurate projects faster, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+## My process
 
-You will find all the required assets in the `/images` folder. The assets are already optimized.
+### Built with
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+- Semantic HTML5 markup
+- `picture` and `source` for a different image on desktop
+- CSS custom properties
+- Flexbox
+- BEM class naming
+- Google Fonts (Fraunces and Montserrat)
+- Mobile-first workflow with one breakpoint (768px)
 
-## Using AI coding assistants
+### What I learned
 
-We've included two files to help you if you're using AI coding assistants (like Claude, GitHub Copilot, Cursor, etc.) while working on this challenge:
+**`flex: 1` does not always give equal halves.** I gave the image and the text the same `flex: 1`, but the widths were different. The text block has `padding`, and the image has none, so the two items started from different sizes. The free space was shared equally, but the start was not equal. Setting the same start width for both fixes it. Because of `box-sizing: border-box`, 50% includes the padding:
 
-- `AGENTS.md` - Contains detailed instructions for AI assistants on how to help you with this challenge. It's tailored to this challenge's difficulty level, so the AI will provide guidance appropriate to your learning stage—offering more support for beginner challenges and encouraging more independence on advanced ones.
-- `CLAUDE.md` - A pointer file that directs Claude-based tools to the AGENTS.md instructions.
+```css
+.card__picture {
+  flex-basis: 50%;
+}
 
-**How to use them:** You don't need to do anything! These files are automatically detected by most AI coding tools. The AI will read them and adjust its behavior to be a better learning partner—guiding you toward solutions rather than just giving you the answers.
+.card__content {
+  flex: 1 1 50%;
+}
+```
 
-**Note:** These files are designed to help you *learn*, not to do the work for you. The AI is instructed to ask questions, give hints, and explain concepts rather than writing complete solutions.
+**One breakpoint in two places.** The `source` in the HTML and the media query in the CSS must use the same width (768px). When they were different, the desktop image was loaded while the layout was still a column, and the card became very tall.
 
-## Building your project
+**The `height` attribute is a CSS height.** The `height="684"` in the HTML stays as a fixed height even when the width gets smaller, and the image stretches. `height: auto` keeps the proportions. `object-fit: cover` is useful only when both sizes are fixed, so I use it on desktop with `height: 100%`. I also put `width` and `height` on the `source`, because the desktop image has other proportions than the mobile one.
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+**An `img` is inline, again.** The white line under the image came back, now inside `picture`. `display: block` on the `img` removed it.
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+**Hiding text for screen readers.** `display: none` hides the text from screen readers too. `aria-label` on a `span` or `del` is not reliable. I used a `visually-hidden` class, so the words "Current price" and "Original price" are not seen, but they are read aloud:
 
-## Deploying your project
+```css
+.visually-hidden {
+  position: absolute;
+  width: 0.1rem;
+  height: 0.1rem;
+  padding: 0;
+  margin: -0.1rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+```
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+**Measuring against Figma.** Figma shows a line height of 160%, but it draws every line as a whole number: 22px, not 22.4px. Four lines are 88px in Figma and 89.6px in the browser. I kept the relative `line-height`, because the 1.6px difference does not matter. The real difference of 6px in the card height came from the `gap` between the elements, not from the heights of the elements. Now I measure the distances between elements as well (hold `Option` in Figma).
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+### Continued development
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://www.frontendmentor.io/guides/hosting-your-solution).
+- Practise tables separately with a series of small exercises.
+- Check the layout at every width, especially between the breakpoints, not only at the design widths.
+- Learn to write good `alt` texts in English.
+- Get more comfortable with measuring layouts in DevTools and in Figma.
 
-## Create a custom `README.md`
+### Useful resources
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+- [MDN - picture](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) - How to load a different image for a different screen.
+- [MDN - flex-basis](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis) - The start size of a flex item.
+- [MDN - object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) - Cropping an image to a fixed size.
+- [WebAIM - Alternative text](https://webaim.org/techniques/alttext/) - How to write a useful `alt` text.
+- [The A11Y Project - How to hide content](https://www.a11yproject.com/posts/how-to-hide-content/) - Hiding text visually but not for screen readers.
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+### AI Collaboration
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+I used Claude as a mentor and reviewer, not as a code generator.
 
-## Submitting your solution
+- **How I used it:** I wrote all the HTML and CSS myself. Claude checked each stage and pointed out problems: typos in file paths and class names (`desctop`, `./image/`, `card__imege`), a description that repeated the title, the missing `width` and `height` on the `source`, the different breakpoints, and the wrong way to hide text. It also helped me find the cause when the widths of the two halves were not equal.
+- **What worked well:** Short hints that explain the reason, and then I find the fix myself. Checking the final result again after each fix.
+- **What I'd do differently:** Measure the distances between elements, not only the sizes of the elements, before asking about a difference with the design.
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://www.frontendmentor.io/guides/how-to-submit-solutions) for tips on how to do this.
+## Author
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+- Frontend Mentor - [@QusBee](https://www.frontendmentor.io/profile/Qusbee)
+- GitHub - [@QusBee](https://github.com/Qusbee)
 
-## Sharing your solution
+## Acknowledgments
 
-There are multiple places you can share your solution:
-
-1. Share your solution page in the **#finished-projects** channel of the [community](https://www.frontendmentor.io/community). 
-2. Share on [X (formerly Twitter)](https://x.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in your post. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on [LinkedIn](https://www.linkedin.com/company/frontend-mentor/).
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
-
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+Thanks to the Frontend Mentor team for the design files and the challenge brief.
