@@ -23,6 +23,7 @@ body {
   display: flex;
   min-height: 100dvh;
   justify-content: center;
+  align-items: center;
   padding: 5rem 1rem;
   font-family: 'Poppins', sans-serif;
   color: var(--color-grey-500);
@@ -65,7 +66,6 @@ body {
 .card__list {
   display: flex;
   flex-direction: column;
-  max-width: 31.4rem;
   gap: 3.2rem;
   list-style: none;
 }
@@ -153,7 +153,6 @@ body {
 
   .card__list {
     display: grid;
-    max-width: 66rem;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'team-builder team-builder'
@@ -177,5 +176,23 @@ body {
   .card__item--blue {
     grid-area: calculator;
     justify-self: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .card__list {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      'supervisor team-builder calculator'
+      'supervisor karma calculator';
+  }
+
+  .card__header {
+    max-width: 28.6rem;
+  }
+
+  .card__item--blue,
+  .card__item--cyan {
+    align-self: center;
   }
 }
